@@ -29,6 +29,11 @@ def make_predictions(input_data):
 app = Flask(__name__)
 
 
+@app.route("/")
+def index():
+    return "ARIMA Model API"
+
+
 @app.route("/predict", methods=["POST"])
 def predict():
     # Get new data from the request
