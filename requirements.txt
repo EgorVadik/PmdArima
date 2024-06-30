@@ -1,6 +1,7 @@
-flask
-pandas
 numpy
+joblib
 pmdarima
-scikit-learn
-gunicorn
+gradio
+pandas
+torch
+flask
