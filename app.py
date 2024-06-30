@@ -7,6 +7,8 @@ from flask import Flask, request, jsonify
 model = joblib.load('arima_model.pkl')
 
 # Function to generate predictions for new data
+
+
 def make_predictions(input_data):
     try:
         # Convert input data to DataFrame
@@ -26,6 +28,7 @@ def make_predictions(input_data):
 
 app = Flask(__name__)
 
+
 @app.route("/predict", methods=["POST"])
 def predict():
     # Get new data from the request
@@ -39,8 +42,12 @@ def predict():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400  # Return 400 for bad requests
-    
+
 
 # Create Gradio interface for the prediction function
-interface = gr.Interface(fn=make_predictions, inputs=gr.Dataframe(headers=["column1"], datatype="number"), outputs="json")
+interface = gr.Interface(fn=make_predictions, inputs=gr.Dataframe(
+    headers=["column1"], datatype="number"), outputs="json")
 interface.launch(share=True)
+
+if __name__ == "__main__":
+    app.run(port=5000)
